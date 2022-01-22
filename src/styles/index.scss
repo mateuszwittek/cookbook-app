@@ -1,0 +1,19 @@
+@use 'abstract/variables';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *:after, *:before{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-size: variables.$font-size;
+  line-height: variables.$line-height;
+  font-family: variables.$font-family;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
