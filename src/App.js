@@ -1,24 +1,35 @@
-import logo from './assets/logo.svg';
+import {useEffect} from "react";
+import { Routes, Route } from 'react-router-dom';
 import './styles/App.scss';
+import Home from './routes/Home.js';
+import SingleRecipe from './routes/SingleRecipe.js';
 
 function App() {
+
+  const data = {
+    collection: "headers"
+  }
+
+  useEffect(() => {
+    fetch("/api",
+    {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }
+    )
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+  }, []);
+
   return (
     <div className="App bg-background">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1 className="text-heading">Example title</h1>
-        <p className="text-font-dark-base">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="przepisy/*" element={<SingleRecipe />} />
+        </Routes>
     </div>
   );
 }
